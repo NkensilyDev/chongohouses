@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chongo House — Hotel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Karla:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+
+  /* paleta de cores */
+  :root{
+    --cream:      #FAF6F0;
+    --cream-2:    #F1EBE0;
+    --sage:       #8A9A7D;
+    --sage-dark:  #5F6E53;
+    --sand:       #D9C4A5;
+    --rose:       #D9B7A8;
+    --charcoal:   #3E3A34;
+    --white:      #FFFFFF;
+  }
+
+  * {
+    /* box-sizing: border-box em tudo */
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body{
+    font-family: 'Karla', sans-serif;
+    background: var(--cream);
+    color: var(--charcoal);
+    line-height: 1.6;
+  }
+
+  h1,h2,h3{
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    color: var(--sage-dark);
+  }
+
+  /* header fixo ao rolar */
+  header{
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: var(--cream);
+    border-bottom: 1px solid var(--sand);
+
+    /* logo + nav lado a lado */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 6%;
+  }
+
+  header .logo{
+    font-family: 'Fraunces', serif;
+    font-size: 1.4rem;
+    color: var(--sage-dark);
+    letter-spacing: 0.5px;
+  }
+
+  header nav ul{
+    display: flex;
+    gap: 28px;
+    list-style: none;
+  }
+  header nav a{
+    color: var(--charcoal);
+    text-decoration: none;
+    font-size: 0.95rem;
+  }
+  header nav a:hover{ color: var(--sage-dark); }
+
+  /* hero com imagem de fundo */
+  .hero{
+    background:
+      linear-gradient(120deg, rgba(95,110,83,0.78), rgba(95,110,83,0.55)),
+      url('https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+    color: var(--white);
+    padding: 90px 6%;
+    margin: 0 0 40px 0;
+    border-bottom: 6px solid var(--sand);
+  }
+  .hero-box{
+    max-width: 640px;
+    padding: 28px 32px;
+    border: 1px solid rgba(255,255,255,0.4);
+  }
+  .hero h1{ color: var(--white); font-size: 2.4rem; margin-bottom: 14px; }
+  .hero p{ font-size: 1.05rem; opacity: 0.95; }
+
+  section{ padding: 60px 6%; }
+  section h2{ font-size: 1.8rem; margin-bottom: 8px; }
+  .intro-linha{ width: 60px; height: 3px; background: var(--rose); margin-bottom: 24px; border: none; }
+
+  /* imagem flutuante com texto a envolver */
+  .sobre-conteudo{ overflow: auto; max-width: 900px; }
+  .sobre-img{
+    float: left;
+    width: 260px;
+    height: 200px;
+    margin: 0 24px 12px 0;
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--sand);
+  }
+  .sobre-img img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* grelha de quartos */
+  .quartos-grid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 10px;
+  }
+  .quarto-card{
+    background: var(--white);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(62,58,52,0.08);
+  }
+  .quarto-img{
+    height: 170px;
+    background: var(--sand);
+    overflow: hidden;
+  }
+  .quarto-img img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .quarto-card .info{ padding: 18px; }
+  .quarto-card h3{ font-size: 1.1rem; margin-bottom: 6px; }
+  .quarto-card p{ font-size: 0.9rem; color: #6b665d; }
+  .preco{ color: var(--sage-dark); font-weight: 700; margin-top: 8px; display:block; }
+
+  /* lista de comodidades */
+  .comodidades{
+    background: var(--cream-2);
+  }
+  .lista-comodidades{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 20px;
+  }
+  .pill{
+    background: var(--white);
+    border: 1px solid var(--sand);
+    padding: 10px 18px;
+    border-radius: 999px;
+    font-size: 0.9rem;
+  }
+
+  /* galeria com scroll horizontal */
+  .galeria-scroll{
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    padding-bottom: 16px;
+    margin-top: 20px;
+  }
+  .galeria-item{
+    flex: 0 0 220px;
+    height: 160px;
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--rose);
+  }
+  .galeria-item img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  footer{
+    background: var(--sage-dark);
+    color: var(--cream);
+    padding: 50px 6% 24px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+  }
+  footer h3{ color: var(--white); font-size: 1rem; margin-bottom: 10px; }
+  footer p, footer a{ color: rgba(255,255,255,0.8); font-size: 0.88rem; text-decoration:none; }
+  .footer-baixo{
+    grid-column: 1 / -1;
+    border-top: 1px solid rgba(255,255,255,0.2);
+    margin-top: 20px;
+    padding-top: 18px;
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.6);
+  }
+
+  /* ajustes para ecrãs pequenos */
+  @media (max-width: 768px){
+    .hero{ padding: 60px 6%; }
+    .hero h1{ font-size: 1.8rem; }
+
+    .quartos-grid{ grid-template-columns: 1fr; }
+
+    .sobre-img{
+      float: none;
+      width: 100%;
+      height: 180px;
+      margin: 0 0 16px 0;
+    }
+
+    footer{ grid-template-columns: 1fr; }
+
+    header{ flex-direction: column; gap: 12px; padding: 16px 5%; }
+    header nav ul{ gap: 18px; }
+  }
+</style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">Chongo House</div>
+    <nav>
+      <ul>
+        <li><a href="#sobre">Sobre</a></li>
+        <li><a href="#quartos">Quartos</a></li>
+        <li><a href="#comodidades">Comodidades</a></li>
+        <li><a href="#galeria">Galeria</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-box">
+      <h1>Um refúgio tranquilo à beira-mar</h1>
+      <p>O Chongo House é um pequeno hotel de gestão familiar, pensado para quem procura sossego, conforto simples e vistas serenas sobre o oceano.</p>
+    </div>
+  </section>
+
+  <section id="sobre">
+    <h2>Sobre o hotel</h2>
+    <hr class="intro-linha">
+    <div class="sobre-conteudo">
+      <div class="sobre-img">
+        <img src="https://images.unsplash.com/photo-1523712999610-f77fbcfc3843?auto=format&fit=crop&w=600&q=80"
+             alt="Vila piscatória junto ao hotel"
+             onerror="this.onerror=null;this.src='https://picsum.photos/seed/vilaalba-sobre/600/400'">
+      </div>
+      <p>
+        Instalado numa antiga casa de veraneio remodelada, o Chongo House mantém
+        o espírito acolhedor das estalagens tradicionais da costa. Os quartos
+        foram pensados para o essencial: luz natural, roupa de cama de linho
+        e uma paleta de cores suave que convida ao descanso. O pequeno-almoço
+        é servido no terraço, com vista para o jardim de oliveiras e, ao
+        fundo, o mar.
+      </p>
+      <p style="margin-top:12px;">
+        A poucos minutos a pé da vila piscatória, o hotel é o ponto de
+        partida ideal para caminhadas costeiras, para dias de praia calma
+        ou simplesmente para não fazer nada — que é, afinal, a sua
+        especialidade.
+      </p>
+    </div>
+  </section>
+
+  <section id="quartos">
+    <h2>Os nossos quartos</h2>
+    <hr class="intro-linha">
+    <div class="quartos-grid">
+      <div class="quarto-card">
+        <div class="quarto-img">
+          <img src="https://images.unsplash.com/photo-1591088398332-8a7791972843?auto=format&fit=crop&w=500&q=80"
+               alt="Quarto Sálvia"
+               onerror="this.onerror=null;this.src='https://picsum.photos/seed/vilaalba-salvia/500/400'">
+        </div>
+        <div class="info">
+          <h3>Quarto Sálvia</h3>
+          <p>Vista jardim, cama de casal, 18m².</p>
+          <span class="preco">3 800 MZN / noite</span>
+        </div>
+      </div>
+      <div class="quarto-card">
+        <div class="quarto-img">
+          <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=500&q=80"
+               alt="Quarto Areia"
+               onerror="this.onerror=null;this.src='https://picsum.photos/seed/vilaalba-areia/500/400'">
+        </div>
+        <div class="info">
+          <h3>Quarto Areia</h3>
+          <p>Vista mar parcial, cama de casal, 22m².</p>
+          <span class="preco">7 200 MZN / noite</span>
+        </div>
+      </div>
+      <div class="quarto-card">
+        <div class="quarto-img">
+          <img src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&w=500&q=80"
+               alt="Suite Rosa"
+               onerror="this.onerror=null;this.src='https://picsum.photos/seed/vilaalba-suite/500/400'">
+        </div>
+        <div class="info">
+          <h3>Suite Rosa</h3>
+          <p>Vista mar, sala privativa, 32m².</p>
+          <span class="preco">13 500 MZN / noite</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="comodidades" class="comodidades">
+    <h2>Comodidades</h2>
+    <hr class="intro-linha">
+    <div class="lista-comodidades">
+      <span class="pill">Wi-Fi gratuito</span>
+      <span class="pill">Pequeno-almoço incluído</span>
+      <span class="pill">Terraço com vista mar</span>
+      <span class="pill">Jardim de oliveiras</span>
+      <span class="pill">Animais de estimação bem-vindos</span>
+      <span class="pill">Bicicletas gratuitas</span>
+      <span class="pill">Estacionamento privado</span>
+    </div>
+  </section>
+
+  <section id="galeria">
+    <h2>Galeria</h2>
+    <hr class="intro-linha">
+    <div class="galeria-scroll">
+      <div class="galeria-item">
+        <img src="https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?auto=format&fit=crop&w=400&q=80"
+             alt="Piscina do hotel"
+             onerror="this.onerror=null;this.src='https://picsum.photos/seed/vilaalba-g1/400/300'">
+      </div>
+      <div class="galeria-item">
+        <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=400&q=80"
+             alt="Pequeno-almoço no terraço"
+             onerror="this.onerror=null;this.src='https://picsum.photos/seed/vilaalba-g2/400/300'">
+      </div>
+      <div class="galeria-item">
+        <img src="https://images.unsplash.com/photo-1471193945509-9ad0617afabf?auto=format&fit=crop&w=400&q=80"
+             alt="Jardim de oliveiras"
+             onerror="this.onerror=null;this.src='https://picsum.photos/seed/vilaalba-g3/400/300'">
+      </div>
+      <div class="galeria-item">
+        <img src="https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=400&q=80"
+             alt="Fachada do hotel"
+             onerror="this.onerror=null;this.src='https://picsum.photos/seed/vilaalba-g4/400/300'">
+      </div>
+      <div class="galeria-item">
+        <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=400&q=80"
+             alt="Quarto com vista mar"
+             onerror="this.onerror=null;this.src='https://picsum.photos/seed/vilaalba-g5/400/300'">
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div>
+      <h3>Chongo House</h3>
+      <p>Um hotel pequeno, com cuidado grande.</p>
+    </div>
+    <div>
+      <h3>Contacto</h3>
+      <p><a href="#">reservas@chongohouse.co.mz</a></p>
+      <p>+258 84 000 0000</p>
+    </div>
+    <div>
+      <h3>Morada</h3>
+      <p>Avenida da Marginal<br>Maputo, Moçambique</p>
+    </div>
+    <div class="footer-baixo">
+      © 2026 Chongo House — página criada para fins de estudo de CSS.
+    </div>
+  </footer>
+
+</body>
+</html>
